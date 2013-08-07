@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C88363717AECB5100AE7CA1 /* TCLInterp.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C88363517AECB5100AE7CA1 /* TCLInterp.h */; };
+		6C88363817AECB5100AE7CA1 /* TCLInterp.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C88363617AECB5100AE7CA1 /* TCLInterp.m */; };
+		6C88363B17AED14D00AE7CA1 /* TCLObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C88363917AED14D00AE7CA1 /* TCLObj.h */; };
+		6C88363C17AED14D00AE7CA1 /* TCLObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C88363A17AED14D00AE7CA1 /* TCLObj.m */; };
+		6C88364817AEE19400AE7CA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C88364617AEE19400AE7CA1 /* InfoPlist.strings */; };
+		6C88364A17AEE19400AE7CA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C88364917AEE19400AE7CA1 /* main.m */; };
+		6C88364E17AEE19400AE7CA1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6C88364C17AEE19400AE7CA1 /* Credits.rtf */; };
+		6C88365617AEE19400AE7CA1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C88365517AEE19400AE7CA1 /* Images.xcassets */; };
+		6C88365C17AEE19400AE7CA1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0BB517A0A81B002DDF80 /* XCTest.framework */; };
+		6C88365D17AEE19400AE7CA1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0BA017A0A81B002DDF80 /* Cocoa.framework */; };
+		6C88366517AEE19400AE7CA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C88366317AEE19400AE7CA1 /* InfoPlist.strings */; };
+		6C88366717AEE19400AE7CA1 /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C88366617AEE19400AE7CA1 /* WishTests.m */; };
+		6C88366E17AEE24100AE7CA1 /* libtcl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0BCB17A0A859002DDF80 /* libtcl.dylib */; };
+		6C88367017AEE24D00AE7CA1 /* libtk.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C88366F17AEE24D00AE7CA1 /* libtk.dylib */; };
+		6C88367917AEE30800AE7CA1 /* TclObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0B9D17A0A81B002DDF80 /* TclObjC.framework */; };
+		6C88367C17AEE35200AE7CA1 /* TestLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C88367B17AEE35200AE7CA1 /* TestLib.m */; };
+		6C88368317AEE97F00AE7CA1 /* NSObject+Invocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C88368117AEE97F00AE7CA1 /* NSObject+Invocation.h */; };
+		6C88368417AEE97F00AE7CA1 /* NSObject+Invocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C88368217AEE97F00AE7CA1 /* NSObject+Invocation.m */; };
 		6C8A0BA117A0A81B002DDF80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0BA017A0A81B002DDF80 /* Cocoa.framework */; };
 		6C8A0BAB17A0A81B002DDF80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8A0BA917A0A81B002DDF80 /* InfoPlist.strings */; };
 		6C8A0BAF17A0A81B002DDF80 /* TclObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8A0BAE17A0A81B002DDF80 /* TclObjC.m */; };
@@ -15,9 +33,31 @@
 		6C8A0BBA17A0A81B002DDF80 /* TclObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0B9D17A0A81B002DDF80 /* TclObjC.framework */; };
 		6C8A0BC017A0A81B002DDF80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8A0BBE17A0A81B002DDF80 /* InfoPlist.strings */; };
 		6C8A0BC217A0A81B002DDF80 /* TclObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8A0BC117A0A81B002DDF80 /* TclObjCTests.m */; };
+		6C8A0BCC17A0A859002DDF80 /* libtcl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8A0BCB17A0A859002DDF80 /* libtcl.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6C88365E17AEE19400AE7CA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C8A0B9417A0A81B002DDF80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C88364017AEE19400AE7CA1;
+			remoteInfo = Wish;
+		};
+		6C88367D17AEE49600AE7CA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C8A0B9417A0A81B002DDF80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C8A0B9C17A0A81B002DDF80;
+			remoteInfo = TclObjC;
+		};
+		6C88367F17AEE49600AE7CA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C8A0B9417A0A81B002DDF80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C88367417AEE2FC00AE7CA1;
+			remoteInfo = TestLib;
+		};
 		6C8A0BB817A0A81B002DDF80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6C8A0B9417A0A81B002DDF80 /* Project object */;
@@ -28,6 +68,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C88363517AECB5100AE7CA1 /* TCLInterp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLInterp.h; sourceTree = "<group>"; };
+		6C88363617AECB5100AE7CA1 /* TCLInterp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLInterp.m; sourceTree = "<group>"; };
+		6C88363917AED14D00AE7CA1 /* TCLObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLObj.h; sourceTree = "<group>"; };
+		6C88363A17AED14D00AE7CA1 /* TCLObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLObj.m; sourceTree = "<group>"; };
+		6C88364117AEE19400AE7CA1 /* Wish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C88364517AEE19400AE7CA1 /* Wish-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wish-Info.plist"; sourceTree = "<group>"; };
+		6C88364717AEE19400AE7CA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C88364917AEE19400AE7CA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6C88364B17AEE19400AE7CA1 /* Wish-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wish-Prefix.pch"; sourceTree = "<group>"; };
+		6C88364D17AEE19400AE7CA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		6C88365517AEE19400AE7CA1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6C88365B17AEE19400AE7CA1 /* WishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C88366217AEE19400AE7CA1 /* WishTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WishTests-Info.plist"; sourceTree = "<group>"; };
+		6C88366417AEE19400AE7CA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C88366617AEE19400AE7CA1 /* WishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WishTests.m; sourceTree = "<group>"; };
+		6C88366F17AEE24D00AE7CA1 /* libtk.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtk.dylib; path = usr/lib/libtk.dylib; sourceTree = SDKROOT; };
+		6C88367517AEE2FC00AE7CA1 /* libTestLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libTestLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C88367B17AEE35200AE7CA1 /* TestLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLib.m; sourceTree = "<group>"; };
+		6C88368117AEE97F00AE7CA1 /* NSObject+Invocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Invocation.h"; sourceTree = "<group>"; };
+		6C88368217AEE97F00AE7CA1 /* NSObject+Invocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Invocation.m"; sourceTree = "<group>"; };
 		6C8A0B9D17A0A81B002DDF80 /* TclObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TclObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8A0BA017A0A81B002DDF80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6C8A0BA317A0A81B002DDF80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -38,18 +98,46 @@
 		6C8A0BAC17A0A81B002DDF80 /* TclObjC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TclObjC-Prefix.pch"; sourceTree = "<group>"; };
 		6C8A0BAD17A0A81B002DDF80 /* TclObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TclObjC.h; sourceTree = "<group>"; };
 		6C8A0BAE17A0A81B002DDF80 /* TclObjC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TclObjC.m; sourceTree = "<group>"; };
-		6C8A0BB417A0A81B002DDF80 /* TclObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = folder; includeInIndex = 0; path = TclObjCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C8A0BB417A0A81B002DDF80 /* TclObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TclObjCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8A0BB517A0A81B002DDF80 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6C8A0BBD17A0A81B002DDF80 /* TclObjCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TclObjCTests-Info.plist"; sourceTree = "<group>"; };
 		6C8A0BBF17A0A81B002DDF80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C8A0BC117A0A81B002DDF80 /* TclObjCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TclObjCTests.m; sourceTree = "<group>"; };
+		6C8A0BCB17A0A859002DDF80 /* libtcl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcl.dylib; path = usr/lib/libtcl.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6C88363E17AEE19400AE7CA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88367017AEE24D00AE7CA1 /* libtk.dylib in Frameworks */,
+				6C88366E17AEE24100AE7CA1 /* libtcl.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C88365817AEE19400AE7CA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88365D17AEE19400AE7CA1 /* Cocoa.framework in Frameworks */,
+				6C88365C17AEE19400AE7CA1 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C88367217AEE2FC00AE7CA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88367917AEE30800AE7CA1 /* TclObjC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6C8A0B9917A0A81B002DDF80 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C8A0BCC17A0A859002DDF80 /* libtcl.dylib in Frameworks */,
 				6C8A0BA117A0A81B002DDF80 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,11 +155,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C88364317AEE19400AE7CA1 /* Wish */ = {
+			isa = PBXGroup;
+			children = (
+				6C88365517AEE19400AE7CA1 /* Images.xcassets */,
+				6C88364417AEE19400AE7CA1 /* Supporting Files */,
+			);
+			path = Wish;
+			sourceTree = "<group>";
+		};
+		6C88364417AEE19400AE7CA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C88364517AEE19400AE7CA1 /* Wish-Info.plist */,
+				6C88364617AEE19400AE7CA1 /* InfoPlist.strings */,
+				6C88364917AEE19400AE7CA1 /* main.m */,
+				6C88364B17AEE19400AE7CA1 /* Wish-Prefix.pch */,
+				6C88364C17AEE19400AE7CA1 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6C88366017AEE19400AE7CA1 /* WishTests */ = {
+			isa = PBXGroup;
+			children = (
+				6C88366617AEE19400AE7CA1 /* WishTests.m */,
+				6C88366117AEE19400AE7CA1 /* Supporting Files */,
+			);
+			path = WishTests;
+			sourceTree = "<group>";
+		};
+		6C88366117AEE19400AE7CA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C88366217AEE19400AE7CA1 /* WishTests-Info.plist */,
+				6C88366317AEE19400AE7CA1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6C88367A17AEE31F00AE7CA1 /* TestLib */ = {
+			isa = PBXGroup;
+			children = (
+				6C88367B17AEE35200AE7CA1 /* TestLib.m */,
+			);
+			name = TestLib;
+			sourceTree = "<group>";
+		};
 		6C8A0B9317A0A81B002DDF80 = {
 			isa = PBXGroup;
 			children = (
 				6C8A0BA617A0A81B002DDF80 /* TclObjC */,
 				6C8A0BBB17A0A81B002DDF80 /* TclObjCTests */,
+				6C88367A17AEE31F00AE7CA1 /* TestLib */,
+				6C88364317AEE19400AE7CA1 /* Wish */,
+				6C88366017AEE19400AE7CA1 /* WishTests */,
 				6C8A0B9F17A0A81B002DDF80 /* Frameworks */,
 				6C8A0B9E17A0A81B002DDF80 /* Products */,
 			);
@@ -82,6 +220,9 @@
 			children = (
 				6C8A0B9D17A0A81B002DDF80 /* TclObjC.framework */,
 				6C8A0BB417A0A81B002DDF80 /* TclObjCTests.xctest */,
+				6C88364117AEE19400AE7CA1 /* Wish.app */,
+				6C88365B17AEE19400AE7CA1 /* WishTests.xctest */,
+				6C88367517AEE2FC00AE7CA1 /* libTestLib.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +230,8 @@
 		6C8A0B9F17A0A81B002DDF80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C88366F17AEE24D00AE7CA1 /* libtk.dylib */,
+				6C8A0BCB17A0A859002DDF80 /* libtcl.dylib */,
 				6C8A0BA017A0A81B002DDF80 /* Cocoa.framework */,
 				6C8A0BB517A0A81B002DDF80 /* XCTest.framework */,
 				6C8A0BA217A0A81B002DDF80 /* Other Frameworks */,
@@ -109,6 +252,12 @@
 		6C8A0BA617A0A81B002DDF80 /* TclObjC */ = {
 			isa = PBXGroup;
 			children = (
+				6C88363917AED14D00AE7CA1 /* TCLObj.h */,
+				6C88363A17AED14D00AE7CA1 /* TCLObj.m */,
+				6C88368117AEE97F00AE7CA1 /* NSObject+Invocation.h */,
+				6C88368217AEE97F00AE7CA1 /* NSObject+Invocation.m */,
+				6C88363517AECB5100AE7CA1 /* TCLInterp.h */,
+				6C88363617AECB5100AE7CA1 /* TCLInterp.m */,
 				6C8A0BAD17A0A81B002DDF80 /* TclObjC.h */,
 				6C8A0BAE17A0A81B002DDF80 /* TclObjC.m */,
 				6C8A0BA717A0A81B002DDF80 /* Supporting Files */,
@@ -147,16 +296,80 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6C8A0B9A17A0A81B002DDF80 /* Headers */ = {
+		6C88367317AEE2FC00AE7CA1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6C8A0B9A17A0A81B002DDF80 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88363B17AED14D00AE7CA1 /* TCLObj.h in Headers */,
+				6C88368317AEE97F00AE7CA1 /* NSObject+Invocation.h in Headers */,
+				6C88363717AECB5100AE7CA1 /* TCLInterp.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		6C88364017AEE19400AE7CA1 /* Wish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C88366817AEE19400AE7CA1 /* Build configuration list for PBXNativeTarget "Wish" */;
+			buildPhases = (
+				6C88363D17AEE19400AE7CA1 /* Sources */,
+				6C88363E17AEE19400AE7CA1 /* Frameworks */,
+				6C88363F17AEE19400AE7CA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6C88367E17AEE49600AE7CA1 /* PBXTargetDependency */,
+				6C88368017AEE49600AE7CA1 /* PBXTargetDependency */,
+			);
+			name = Wish;
+			productName = Wish;
+			productReference = 6C88364117AEE19400AE7CA1 /* Wish.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6C88365A17AEE19400AE7CA1 /* WishTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C88366B17AEE19400AE7CA1 /* Build configuration list for PBXNativeTarget "WishTests" */;
+			buildPhases = (
+				6C88365717AEE19400AE7CA1 /* Sources */,
+				6C88365817AEE19400AE7CA1 /* Frameworks */,
+				6C88365917AEE19400AE7CA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6C88365F17AEE19400AE7CA1 /* PBXTargetDependency */,
+			);
+			name = WishTests;
+			productName = WishTests;
+			productReference = 6C88365B17AEE19400AE7CA1 /* WishTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6C88367417AEE2FC00AE7CA1 /* TestLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C88367617AEE2FC00AE7CA1 /* Build configuration list for PBXNativeTarget "TestLib" */;
+			buildPhases = (
+				6C88367117AEE2FC00AE7CA1 /* Sources */,
+				6C88367217AEE2FC00AE7CA1 /* Frameworks */,
+				6C88367317AEE2FC00AE7CA1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestLib;
+			productName = TestLib;
+			productReference = 6C88367517AEE2FC00AE7CA1 /* libTestLib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		6C8A0B9C17A0A81B002DDF80 /* TclObjC */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C8A0BC517A0A81B002DDF80 /* Build configuration list for PBXNativeTarget "TclObjC" */;
@@ -199,8 +412,12 @@
 		6C8A0B9417A0A81B002DDF80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TCL;
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
+					6C88365A17AEE19400AE7CA1 = {
+						TestTargetID = 6C8A0B9C17A0A81B002DDF80;
+					};
 					6C8A0BB317A0A81B002DDF80 = {
 						TestTargetID = 6C8A0B9C17A0A81B002DDF80;
 					};
@@ -212,6 +429,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 6C8A0B9317A0A81B002DDF80;
 			productRefGroup = 6C8A0B9E17A0A81B002DDF80 /* Products */;
@@ -220,11 +438,32 @@
 			targets = (
 				6C8A0B9C17A0A81B002DDF80 /* TclObjC */,
 				6C8A0BB317A0A81B002DDF80 /* TclObjCTests */,
+				6C88364017AEE19400AE7CA1 /* Wish */,
+				6C88365A17AEE19400AE7CA1 /* WishTests */,
+				6C88367417AEE2FC00AE7CA1 /* TestLib */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6C88363F17AEE19400AE7CA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88364817AEE19400AE7CA1 /* InfoPlist.strings in Resources */,
+				6C88365617AEE19400AE7CA1 /* Images.xcassets in Resources */,
+				6C88364E17AEE19400AE7CA1 /* Credits.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C88365917AEE19400AE7CA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88366517AEE19400AE7CA1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6C8A0B9B17A0A81B002DDF80 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -244,11 +483,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6C88363D17AEE19400AE7CA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88364A17AEE19400AE7CA1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C88365717AEE19400AE7CA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88366717AEE19400AE7CA1 /* WishTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C88367117AEE2FC00AE7CA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C88367C17AEE35200AE7CA1 /* TestLib.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6C8A0B9817A0A81B002DDF80 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C88363C17AED14D00AE7CA1 /* TCLObj.m in Sources */,
+				6C88368417AEE97F00AE7CA1 /* NSObject+Invocation.m in Sources */,
 				6C8A0BAF17A0A81B002DDF80 /* TclObjC.m in Sources */,
+				6C88363817AECB5100AE7CA1 /* TCLInterp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +529,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6C88365F17AEE19400AE7CA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C88364017AEE19400AE7CA1 /* Wish */;
+			targetProxy = 6C88365E17AEE19400AE7CA1 /* PBXContainerItemProxy */;
+		};
+		6C88367E17AEE49600AE7CA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C8A0B9C17A0A81B002DDF80 /* TclObjC */;
+			targetProxy = 6C88367D17AEE49600AE7CA1 /* PBXContainerItemProxy */;
+		};
+		6C88368017AEE49600AE7CA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C88367417AEE2FC00AE7CA1 /* TestLib */;
+			targetProxy = 6C88367F17AEE49600AE7CA1 /* PBXContainerItemProxy */;
+		};
 		6C8A0BB917A0A81B002DDF80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6C8A0B9C17A0A81B002DDF80 /* TclObjC */;
@@ -271,6 +552,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6C88364617AEE19400AE7CA1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C88364717AEE19400AE7CA1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6C88364C17AEE19400AE7CA1 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C88364D17AEE19400AE7CA1 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		6C88366317AEE19400AE7CA1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C88366417AEE19400AE7CA1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		6C8A0BA917A0A81B002DDF80 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -290,6 +595,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6C88366917AEE19400AE7CA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wish/Wish-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = /opt/X11/include;
+				INFOPLIST_FILE = "Wish/Wish-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6C88366A17AEE19400AE7CA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wish/Wish-Prefix.pch";
+				HEADER_SEARCH_PATHS = /opt/X11/include;
+				INFOPLIST_FILE = "Wish/Wish-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6C88366C17AEE19400AE7CA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TclObjC.framework/Versions/A/TclObjC";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wish/Wish-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "WishTests/WishTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6C88366D17AEE19400AE7CA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TclObjC.framework/Versions/A/TclObjC";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wish/Wish-Prefix.pch";
+				INFOPLIST_FILE = "WishTests/WishTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		6C88367717AEE2FC00AE7CA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6C88367817AEE2FC00AE7CA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		6C8A0BC317A0A81B002DDF80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -433,6 +830,30 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6C88366817AEE19400AE7CA1 /* Build configuration list for PBXNativeTarget "Wish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C88366917AEE19400AE7CA1 /* Debug */,
+				6C88366A17AEE19400AE7CA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6C88366B17AEE19400AE7CA1 /* Build configuration list for PBXNativeTarget "WishTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C88366C17AEE19400AE7CA1 /* Debug */,
+				6C88366D17AEE19400AE7CA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6C88367617AEE2FC00AE7CA1 /* Build configuration list for PBXNativeTarget "TestLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C88367717AEE2FC00AE7CA1 /* Debug */,
+				6C88367817AEE2FC00AE7CA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		6C8A0B9717A0A81B002DDF80 /* Build configuration list for PBXProject "TclObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -449,6 +870,7 @@
 				6C8A0BC717A0A81B002DDF80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6C8A0BC817A0A81B002DDF80 /* Build configuration list for PBXNativeTarget "TclObjCTests" */ = {
 			isa = XCConfigurationList;
@@ -457,6 +879,7 @@
 				6C8A0BCA17A0A81B002DDF80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

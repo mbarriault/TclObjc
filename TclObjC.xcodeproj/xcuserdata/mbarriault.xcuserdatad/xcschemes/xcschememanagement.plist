@@ -9,9 +9,34 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>TestLib.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Wish.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6C88364017AEE19400AE7CA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6C88365A17AEE19400AE7CA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6C88367417AEE2FC00AE7CA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6C8A0B9C17A0A81B002DDF80</key>
 		<dict>
 			<key>primary</key>

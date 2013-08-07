@@ -24,8 +24,10 @@
 -(void) appendResult:(NSString*)result, ... NS_REQUIRES_NIL_TERMINATION;
 -(void) setObjResult:(TCLObj*)obj;
 -(void) createCommand:(NSString*)command selector:(SEL)sel withObject:(id)object;
+-(void) createObject:(Class)class;
+-(void) createObject:(Class)class initSelector:(SEL)sel withContext:(id)context;
 
 @property (readwrite) int error;
 @property (readonly) Tcl_Interp* interp;
-@property (strong) NSArray* objects;
+@property (strong) NSMutableArray* objects;
 @end

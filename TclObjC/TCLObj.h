@@ -10,6 +10,7 @@
 #import <Tcl/tcl.h>
 
 @interface TCLObj : NSObject
++(instancetype) obj;
 +(instancetype) objWithCObj:(Tcl_Obj*)obj;
 -(instancetype) initWithCObj:(Tcl_Obj*)obj;
 @property (readonly) Tcl_Obj* obj;

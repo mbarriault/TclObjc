@@ -28,7 +28,7 @@
 -(instancetype) init {
     if ( (self = [super init]) ) {
         _interp = nil;
-        _objects = [NSArray array];
+        _objects = [NSMutableArray array];
     }
     return self;
 }
@@ -56,7 +56,7 @@
 
 -(int) providePackage:(NSString *)package version:(NSString *)version {
     INTERP_EXISTS;
-    if ( Tcl_PkgProvide(self.interp, package.UTF8String, version.UTF8String) == TCL_ERROR )
+    if ( Tcl_PkgProvide(self.interp, [package cStringUsingEncoding:NSASCIIStringEncoding], [version cStringUsingEncoding:NSASCIIStringEncoding]) == TCL_ERROR )
         return TCL_ERROR;
     else
         return TCL_OK;
@@ -70,7 +70,7 @@
     va_list args;
     va_start(args, result);
     for ( NSString* arg = result; arg != nil; va_arg(args, NSString*) )
-        Tcl_AppendResult(self.interp, arg.UTF8String);
+        Tcl_AppendResult(self.interp, [arg cStringUsingEncoding:NSASCIIStringEncoding], NULL);
     va_end(args);
 }
 
@@ -81,6 +81,7 @@
 typedef struct {
     void* object;
     SEL sel;
+    void* parent;
 } ObjCmd;
 
 int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv[]) {
@@ -106,6 +107,11 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
 }
 
 void DeleteObjCmd(ClientData data) {
+    NSLog(@"Deleting");
+    id obj = (__bridge id)(((ObjCmd*)data)->object);
+    TCLInterp* parent = (__bridge TCLInterp*)(((ObjCmd*)data)->parent);
+    if ( [parent.objects indexOfObject:obj] != NSNotFound )
+        [parent.objects removeObject:obj];
     CFBridgingRelease(((ObjCmd*)data)->object);
 }
 
@@ -113,8 +119,25 @@ void DeleteObjCmd(ClientData data) {
     ObjCmd* cmd = malloc(sizeof(ObjCmd));
     cmd->object = (void*)CFBridgingRetain(object);
     cmd->sel = sel;
+    cmd->parent = (__bridge void*)self;
 
-    Tcl_CreateObjCommand(self.interp, command.UTF8String, RunObjCmd, cmd, DeleteObjCmd);
+    Tcl_CreateObjCommand(self.interp, [command cStringUsingEncoding:NSASCIIStringEncoding], RunObjCmd, cmd, DeleteObjCmd);
+}
+
+-(void) createObject:(Class)class {
+    [self createObject:class initSelector:@selector(init) withContext:nil];
+}
+
+-(void) createObject:(Class)class initSelector:(SEL)sel withContext:(id)context {
+    id obj = [class alloc];
+    if ( [obj respondsToSelector:sel] ) {
+        [obj performSelector:sel withContext:context];
+        [self.objects addObject:obj];
+        [self createCommand:NSStringFromClass(class) selector:@selector(bar:) withObject:obj];
+    }
+    else {
+        [self error:@"Invalid initializer"];
+    }
 }
 
 @end

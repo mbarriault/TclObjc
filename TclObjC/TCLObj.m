@@ -11,6 +11,10 @@
 
 @implementation TCLObj
 
++(instancetype) obj {
+    return [[TCLObj alloc] init];
+}
+
 +(instancetype) objWithCObj:(Tcl_Obj *)obj {
     return [[TCLObj alloc] initWithCObj:obj];
 }

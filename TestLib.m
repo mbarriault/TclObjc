@@ -16,10 +16,9 @@
 @implementation Foo
 
 -(int) bar:(NSString*)val {
-    TCLObj* obj = [[TCLObj alloc] init];
-    obj.intValue = 5;
-    [[TCLInterp sharedInterp] setObjResult:obj];
-    NSLog(@"%@", val);
+    TCLObj* obj = [TCLObj obj];
+    obj.stringValue = val;
+    [TCLInterp sharedInterp].objResult = obj;
     return TCL_OK;
 }
 
@@ -30,6 +29,7 @@ int Testlib_Init(Tcl_Interp* interp) {
     [[TCLInterp sharedInterp] providePackage:@"TestLib"];
     Foo* foo = [[Foo alloc] init];
     CFBridgingRetain(foo);
-    [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
+//    [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
+    [[TCLInterp sharedInterp] createObject:[Foo class]];
     return TCL_OK;
 }

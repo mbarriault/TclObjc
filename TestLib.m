@@ -22,6 +22,21 @@
     return TCL_OK;
 }
 
+-(int) huh {
+    [TCLInterp sharedInterp].objResult = [TCLObj objWithCObj:Tcl_NewStringObj("HUH?!", -1)];
+    return TCL_ERROR;
+}
+
+-(int) twoargs:(NSString*)arg1 and:(NSString*)arg2 {
+    NSLog(@"%@ %@", arg1, arg2);
+    return TCL_OK;
+}
+
+-(int) blankargs:(NSString*)arg1 :(NSString*)arg2 {
+    NSLog(@"BLANK %@ %@", arg1, arg2);
+    return TCL_OK;
+}
+
 @end
 
 int Testlib_Init(Tcl_Interp* interp) {

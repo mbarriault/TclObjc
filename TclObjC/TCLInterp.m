@@ -87,9 +87,26 @@ typedef struct {
 int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv[]) {
     id oobj = (__bridge id)(((ObjCmd*)data)->object);
     SEL sel = ((ObjCmd*)data)->sel;
-    NSMutableArray* args = [NSMutableArray arrayWithCapacity:objc-1];
-    for ( int i=1; i<objc; ++i ) {
-        [args addObject:[NSString stringWithCString:Tcl_GetStringFromObj(objv[i], NULL) encoding:NSASCIIStringEncoding]];
+    NSMutableArray* args;
+    if ( sel != nil ) {
+        args = [NSMutableArray arrayWithCapacity:objc-1];
+        for ( int i=1; i<objc; ++i ) {
+            [args addObject:[NSString stringWithCString:Tcl_GetStringFromObj(objv[i], NULL) encoding:NSASCIIStringEncoding]];
+        }
+    }
+    else {
+        NSMutableString* selString = [NSMutableString string];
+        args = [NSMutableArray arrayWithCapacity:objc];
+        for ( int i=1; i<objc; ++i ) {
+            [selString appendString:[NSString stringWithCString:Tcl_GetStringFromObj(objv[i], NULL) encoding:NSASCIIStringEncoding]];
+            ++i;
+            if ( i != objc ) {
+                [selString appendString:@":"];
+                [args addObject:[NSString stringWithCString:Tcl_GetStringFromObj(objv[i], NULL) encoding:NSASCIIStringEncoding]];
+            }
+        }
+        NSLog(@"Selector: %@ | Args %@", selString, args);
+        sel = NSSelectorFromString(selString);
     }
     if ( [oobj respondsToSelector:sel] ) {
         @try {
@@ -115,6 +132,10 @@ void DeleteObjCmd(ClientData data) {
     CFBridgingRelease(((ObjCmd*)data)->object);
 }
 
+-(void) createCommand:(NSString *)command withObject:(id)object {
+    [self createCommand:command selector:nil withObject:object];
+}
+
 -(void) createCommand:(NSString*)command selector:(SEL)sel withObject:(id)object {
     ObjCmd* cmd = malloc(sizeof(ObjCmd));
     cmd->object = (void*)CFBridgingRetain(object);
@@ -133,7 +154,7 @@ void DeleteObjCmd(ClientData data) {
     if ( [obj respondsToSelector:sel] ) {
         [obj performSelector:sel withContext:context];
         [self.objects addObject:obj];
-        [self createCommand:NSStringFromClass(class) selector:@selector(bar:) withObject:obj];
+        [self createCommand:NSStringFromClass(class) withObject:obj];
     }
     else {
         [self error:@"Invalid initializer"];

@@ -23,6 +23,7 @@
 -(void) resetResult;
 -(void) appendResult:(NSString*)result, ... NS_REQUIRES_NIL_TERMINATION;
 -(void) setObjResult:(TCLObj*)obj;
+-(void) createCommand:(NSString*)command withObject:(id)object;
 -(void) createCommand:(NSString*)command selector:(SEL)sel withObject:(id)object;
 -(void) createObject:(Class)class;
 -(void) createObject:(Class)class initSelector:(SEL)sel withContext:(id)context;

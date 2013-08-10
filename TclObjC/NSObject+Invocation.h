@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (Invocation)
--(void) performSelector:(SEL)aSelector withContext:(id)context;
+-(void*) performSelector:(SEL)aSelector withContext:(id)context;
 @end

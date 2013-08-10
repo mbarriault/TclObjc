@@ -110,7 +110,7 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
     }
     if ( [oobj respondsToSelector:sel] ) {
         @try {
-            [oobj performSelector:sel withContext:args];
+            return (int)[oobj performSelector:sel withContext:args];
         }
         @catch (NSException *exception) {
             return TCL_ERROR;

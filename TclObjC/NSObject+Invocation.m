@@ -12,7 +12,7 @@
 
 @implementation NSObject (Invocation)
 
--(void) performSelector:(SEL)aSelector withContext:(id)context {
+-(void*) performSelector:(SEL)aSelector withContext:(id)context {
     NSInvocation* invocation;
     if ( [context isKindOfClass:[NSArray class]] ) {
         NSMethodSignature* signature = [self methodSignatureForSelector:aSelector];
@@ -39,9 +39,12 @@
             }
         }
         [invocation performSelector:@selector(invoke) withObject:nil];
+        void* ret;
+        [invocation getReturnValue:ret];
+        return ret;
     }
     else {
-        [self performSelector:aSelector withObject:context];
+        return (__bridge void*)[self performSelector:aSelector withObject:context];
     }
 }
 

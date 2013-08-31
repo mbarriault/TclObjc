@@ -37,7 +37,7 @@
     return TCL_OK;
 }
 
--(id) getself {
+-(Foo*) getself {
     return self;
 }
 

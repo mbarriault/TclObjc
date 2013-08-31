@@ -107,7 +107,7 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
     if ( [oobj respondsToSelector:sel] ) {
         void* res = NULL;
         @try {
-            [oobj performSelector:sel withContext:args];
+            res = [oobj performSelector:sel withContext:args];
             Method m = class_getInstanceMethod([oobj class], sel);
             char type[256];
             method_getReturnType(m, type, 256);
@@ -116,19 +116,24 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     id retobj = (__bridge id) res;
                     NSArray* keys = [[TCLInterp sharedInterp].store allKeysForObject:retobj];
                     if ( keys.count > 0 ) {
-                        [[TCLInterp sharedInterp] appendResult:keys[0], nil];
+                        [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromString:keys[0]]];
                         return TCL_OK;
                     }
                     break;
                 }
                 case 'i': {
-                    int retobj = (int)res;
-                    [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromString:[NSString stringWithFormat:@"%d", retobj, nil]]];
+                    int retval = *(int*)res;
+                    [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromInt:retval]];
                     break;
                 }
-                default:
+                default: {
+                    TCLObj* obj = [TCLObj obj];
+                    obj.stringValue = [NSString stringWithFormat:@"Invalid return type %d", type[0]];
+                    [[TCLInterp sharedInterp] setObjResult:obj];
                     break;
+                }
             }
+            return TCL_OK;
         }
         @catch (NSException *exception) {
             TCLObj* obj = [TCLObj obj];
@@ -138,7 +143,7 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
         }
         @finally {
             int ret = [TCLInterp sharedInterp].error;
-            [TCLInterp sharedInterp].error = TCL_OK;;
+            [TCLInterp sharedInterp].error = TCL_OK;
             return ret;
         }
     }

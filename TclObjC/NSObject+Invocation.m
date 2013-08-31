@@ -39,7 +39,7 @@
         [invocation performSelector:@selector(invoke) withObject:nil];
         NSUInteger length = invocation.methodSignature.methodReturnLength;
         void* ret = (void*)malloc(length);
-        [invocation getReturnValue:ret];
+        [invocation getReturnValue:&ret];
         return ret;
     }
     else {

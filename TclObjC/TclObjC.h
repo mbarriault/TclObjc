@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TCLInterp.h"
 
 @interface TclObjC : NSObject
+
+-(void) create:(NSString *)classString named:(NSString *)name;
 
 @end

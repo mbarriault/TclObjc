@@ -8,6 +8,7 @@
 
 #import "TCLInterp.h"
 #import "NSObject+Invocation.h"
+#import "TclObjC.h"
 
 @implementation TCLInterp
 
@@ -23,30 +24,22 @@
 +(void) setSharedCInterp:(Tcl_Interp *)interp {
     TCLInterp* sharedInterp = [self sharedInterp];
     sharedInterp->_interp = interp;
+    [sharedInterp createObject:[TclObjC class] name:@"objc"];
 }
 
 -(instancetype) init {
     if ( (self = [super init]) ) {
         _interp = nil;
-        _objects = [NSMutableArray array];
+        _store = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
--(TCLObj*) objectAtIndexedSubscript:(NSUInteger)idx {
-    id obj = self.objects[idx];
-    if ( [obj isKindOfClass:[TCLObj class]] ) {
-        return obj;
-    }
-    else {
-        NSLog(@"Error, non-Tcl object found in interpreter");
-        return nil;
-    }
-}
-
 -(void) error:(NSString *)error {
     [self resetResult];
-    [self appendResult:error, nil];
+    TCLObj* ret = [TCLObj obj];
+    ret.stringValue = error;
+    [self setObjResult:ret];
     _error = TCL_ERROR;
 }
 
@@ -79,6 +72,7 @@
 }
 
 typedef struct {
+    void* name;
     void* object;
     SEL sel;
     void* parent;
@@ -109,26 +103,38 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
         sel = NSSelectorFromString(selString);
     }
     if ( [oobj respondsToSelector:sel] ) {
+//        void* res = NULL;
         @try {
-            return (int)[oobj performSelector:sel withContext:args];
+            [oobj performSelector:sel withContext:args];
+//            if ( [(__bridge id)res isKindOfClass:[NSObject class]] ) {
+//
+//            }
         }
         @catch (NSException *exception) {
+            TCLObj* obj = [TCLObj obj];
+            obj.stringValue = [NSString stringWithFormat:@"Selector %@ raised exception %@", NSStringFromSelector(sel), exception.description];
+            [[TCLInterp sharedInterp] setObjResult:obj];
             return TCL_ERROR;
         }
         @finally {
-            return TCL_OK;
+            int ret = [TCLInterp sharedInterp].error;
+            [TCLInterp sharedInterp].error = TCL_OK;;
+            return ret;
         }
     }
-    else
+    else {
+        TCLObj* obj = [TCLObj obj];
+        obj.stringValue = [NSString stringWithFormat:@"Object doesn't respond to selector %@", NSStringFromSelector(sel)];
+        [[TCLInterp sharedInterp] setObjResult:obj];
         return TCL_ERROR;
+    }
 }
 
 void DeleteObjCmd(ClientData data) {
-    NSLog(@"Deleting");
-    id obj = (__bridge id)(((ObjCmd*)data)->object);
+    NSString* name = (__bridge NSString*)(((ObjCmd*)data)->name);
     TCLInterp* parent = (__bridge TCLInterp*)(((ObjCmd*)data)->parent);
-    if ( [parent.objects indexOfObject:obj] != NSNotFound )
-        [parent.objects removeObject:obj];
+    if ( parent != nil && [parent.store objectForKey:name] != nil )
+        [parent.store removeObjectForKey:name];
     CFBridgingRelease(((ObjCmd*)data)->object);
 }
 
@@ -145,20 +151,24 @@ void DeleteObjCmd(ClientData data) {
     Tcl_CreateObjCommand(self.interp, [command cStringUsingEncoding:NSASCIIStringEncoding], RunObjCmd, cmd, DeleteObjCmd);
 }
 
--(void) createObject:(Class)class {
-    [self createObject:class initSelector:@selector(init) withContext:nil];
+-(void) createObject:(Class)class name:(NSString*)name {
+    [self createObject:class name:name initSelector:@selector(init) withContext:nil];
 }
 
--(void) createObject:(Class)class initSelector:(SEL)sel withContext:(id)context {
+-(void) createObject:(Class)class name:(NSString*)name initSelector:(SEL)sel withContext:(id)context {
     id obj = [class alloc];
     if ( [obj respondsToSelector:sel] ) {
         [obj performSelector:sel withContext:context];
-        [self.objects addObject:obj];
-        [self createCommand:NSStringFromClass(class) withObject:obj];
+        [self.store setObject:obj forKey:name];
+        [self createCommand:name withObject:obj];
     }
     else {
         [self error:@"Invalid initializer"];
     }
+}
+
+-(void) createClass:(Class)class {
+    [self createCommand:NSStringFromClass(class) withObject:class];
 }
 
 @end

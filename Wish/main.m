@@ -13,6 +13,7 @@ int AppInit(Tcl_Interp *interp) {
     if(Tk_Init(interp) == TCL_ERROR) return TCL_ERROR;
     Tcl_SetVar(interp,"tcl_rcFileName","~/.wishrc",
                TCL_GLOBAL_ONLY);
+    Tcl_Eval(interp, "load libTestLib.dylib; package require TestLib; puts Okay;");
     return TCL_OK;
 }
 

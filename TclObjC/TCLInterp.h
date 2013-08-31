@@ -15,7 +15,6 @@
 @interface TCLInterp : NSObject
 +(instancetype) sharedInterp;
 +(void) setSharedCInterp:(Tcl_Interp*)interp;
--(TCLObj*) objectAtIndexedSubscript:(NSUInteger)idx;
 -(void) error:(NSString*)error;
 
 -(int) providePackage:(NSString*)package;
@@ -25,10 +24,11 @@
 -(void) setObjResult:(TCLObj*)obj;
 -(void) createCommand:(NSString*)command withObject:(id)object;
 -(void) createCommand:(NSString*)command selector:(SEL)sel withObject:(id)object;
--(void) createObject:(Class)class;
--(void) createObject:(Class)class initSelector:(SEL)sel withContext:(id)context;
+-(void) createObject:(Class)class name:(NSString*)name;
+-(void) createObject:(Class)class name:(NSString*)name initSelector:(SEL)sel withContext:(id)context;
+-(void) createClass:(Class)class;
 
 @property (readwrite) int error;
 @property (readonly) Tcl_Interp* interp;
-@property (strong) NSMutableArray* objects;
+@property (strong) NSMutableDictionary* store;
 @end

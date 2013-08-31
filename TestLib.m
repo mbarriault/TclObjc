@@ -45,6 +45,6 @@ int Testlib_Init(Tcl_Interp* interp) {
     Foo* foo = [[Foo alloc] init];
     CFBridgingRetain(foo);
 //    [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
-    [[TCLInterp sharedInterp] createObject:[Foo class]];
+//    [[TCLInterp sharedInterp] createObject:[Foo class] name:@"foo"];
     return TCL_OK;
 }

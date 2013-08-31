@@ -10,4 +10,10 @@
 
 @implementation TclObjC
 
+-(void) create:(NSString *)classString named:(NSString *)name {
+    Class class = NSClassFromString(classString);
+    NSLog(@"Creating %@ %@", classString, name);
+    [[TCLInterp sharedInterp] createObject:class name:name];
+}
+
 @end

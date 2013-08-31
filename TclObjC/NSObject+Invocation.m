@@ -39,7 +39,7 @@
             }
         }
         [invocation performSelector:@selector(invoke) withObject:nil];
-        void* ret;
+        void* ret = NULL;
         [invocation getReturnValue:ret];
         return ret;
     }

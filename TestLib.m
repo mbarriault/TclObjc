@@ -37,6 +37,10 @@
     return TCL_OK;
 }
 
+-(id) getself {
+    return self;
+}
+
 @end
 
 int Testlib_Init(Tcl_Interp* interp) {
@@ -44,7 +48,7 @@ int Testlib_Init(Tcl_Interp* interp) {
     [[TCLInterp sharedInterp] providePackage:@"TestLib"];
     Foo* foo = [[Foo alloc] init];
     CFBridgingRetain(foo);
-//    [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
-//    [[TCLInterp sharedInterp] createObject:[Foo class] name:@"foo"];
+    [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
+    [[TCLInterp sharedInterp] createObject:[Foo class] name:@"Foo"];
     return TCL_OK;
 }

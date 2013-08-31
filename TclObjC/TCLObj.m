@@ -19,6 +19,24 @@
     return [[TCLObj alloc] initWithCObj:obj];
 }
 
++(instancetype) objFromString:(NSString *)stringValue {
+    TCLObj* obj = [self obj];
+    obj.stringValue = stringValue;
+    return obj;
+}
+
++(instancetype) objFromInt:(int)intValue {
+    TCLObj* obj = [self obj];
+    obj.intValue = intValue;
+    return obj;
+}
+
++(instancetype) objFromDouble:(double)doubleValue {
+    TCLObj* obj = [self obj];
+    obj.doubleValue = doubleValue;
+    return obj;
+}
+
 -(instancetype) init {
     return [self initWithCObj:Tcl_NewObj()];
 }

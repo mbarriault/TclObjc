@@ -13,10 +13,9 @@
 @implementation NSObject (Invocation)
 
 -(void*) performSelector:(SEL)aSelector withContext:(id)context {
-    NSInvocation* invocation;
     if ( [context isKindOfClass:[NSArray class]] ) {
         NSMethodSignature* signature = [self methodSignatureForSelector:aSelector];
-        invocation = [NSInvocation invocationWithMethodSignature:signature];
+        NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
         NSArray* parameterValues = (NSArray*)context;
         NSUInteger parameterCount = parameterValues.count;
 
@@ -24,9 +23,8 @@
         if ( parameterCount == argumentCount ) {
             invocation.target = self;
             invocation.selector = aSelector;
-            NSUInteger i, count = parameterCount;
 
-            for ( i=0; i<count; ++i ) {
+            for ( NSUInteger i=0; i<parameterCount; ++i ) {
                 id currentValue = [parameterValues objectAtIndex:i];
                 if ( [currentValue isKindOfClass:[NSValue class]] ) {
                     void* bufferForValue;
@@ -39,7 +37,8 @@
             }
         }
         [invocation performSelector:@selector(invoke) withObject:nil];
-        void* ret = NULL;
+        NSUInteger length = invocation.methodSignature.methodReturnLength;
+        void* ret = (void*)malloc(length);
         [invocation getReturnValue:ret];
         return ret;
     }

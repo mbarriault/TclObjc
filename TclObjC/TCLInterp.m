@@ -9,6 +9,8 @@
 #import "TCLInterp.h"
 #import "NSObject+Invocation.h"
 #import "TclObjC.h"
+#import <objc/objc.h>
+#import <objc/runtime.h>
 
 @implementation TCLInterp
 
@@ -103,12 +105,30 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
         sel = NSSelectorFromString(selString);
     }
     if ( [oobj respondsToSelector:sel] ) {
-//        void* res = NULL;
+        void* res = NULL;
         @try {
             [oobj performSelector:sel withContext:args];
-//            if ( [(__bridge id)res isKindOfClass:[NSObject class]] ) {
-//
-//            }
+            Method m = class_getInstanceMethod([oobj class], sel);
+            char type[256];
+            method_getReturnType(m, type, 256);
+            switch (type[0]) {
+                case '@': {
+                    id retobj = (__bridge id) res;
+                    NSArray* keys = [[TCLInterp sharedInterp].store allKeysForObject:retobj];
+                    if ( keys.count > 0 ) {
+                        [[TCLInterp sharedInterp] appendResult:keys[0], nil];
+                        return TCL_OK;
+                    }
+                    break;
+                }
+                case 'i': {
+                    int retobj = (int)res;
+                    [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromString:[NSString stringWithFormat:@"%d", retobj, nil]]];
+                    break;
+                }
+                default:
+                    break;
+            }
         }
         @catch (NSException *exception) {
             TCLObj* obj = [TCLObj obj];

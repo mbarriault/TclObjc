@@ -38,8 +38,16 @@
         }
         [invocation performSelector:@selector(invoke) withObject:nil];
         NSUInteger length = invocation.methodSignature.methodReturnLength;
+        const char* type = invocation.methodSignature.methodReturnType;
         void* ret = (void*)malloc(length);
-        [invocation getReturnValue:&ret];
+        switch (type[0]) {
+            case '@':
+                [invocation getReturnValue:&ret];
+                break;
+            default:
+                [invocation getReturnValue:ret];
+                break;
+        }
         return ret;
     }
     else {

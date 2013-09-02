@@ -80,6 +80,11 @@ typedef struct {
     void* parent;
 } ObjCmd;
 
+typedef enum {
+    IntType,
+    DoubleType
+} ChooseType;
+
 int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv[]) {
     id oobj = (__bridge id)(((ObjCmd*)data)->object);
     SEL sel = ((ObjCmd*)data)->sel;
@@ -111,9 +116,12 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
             Method m = class_getInstanceMethod([oobj class], sel);
             char type[256];
             method_getReturnType(m, type, 256);
+            int retvali;
+            double retvald;
+            ChooseType T;
             switch (type[0]) {
                 case '@': {
-                    id retobj = (__bridge id) res;
+                    id retobj = (__bridge_transfer id) res;
                     NSArray* keys = [[TCLInterp sharedInterp].store allKeysForObject:retobj];
                     if ( keys.count > 0 ) {
                         [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromString:keys[0]]];
@@ -121,11 +129,50 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     }
                     break;
                 }
-                case 'i': {
-                    int retval = *(int*)res;
-                    [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromInt:retval]];
+                case 'c':
+                    retvali = (int) (*(char*)res);
+                    T = IntType;
                     break;
-                }
+                case 'C':
+                    retvali = (int) (*(unsigned char*)res);
+                    T = IntType;
+                    break;
+                case 's':
+                    retvali = (int) (*(short*)res);
+                    T = IntType;
+                    break;
+                case 'S':
+                    retvali = (int) (*(unsigned short*)res);
+                    T = IntType;
+                    break;
+                case 'i':
+                    retvali = (int) (*(int*)res);
+                    T = IntType;
+                    break;
+                case 'I':
+                    retvali = (int) (*(unsigned int*)res);
+                    T = IntType;
+                    break;
+                case 'q':
+                    retvali = (int) (*(long*)res);
+                    T = IntType;
+                    break;
+                case 'Q':
+                    retvali = (int) (*(unsigned long*)res);
+                    T = IntType;
+                    break;
+                case 'f':
+                    retvald = (double) (*(float*)res);
+                    T = DoubleType;
+                    break;
+                case 'd':
+                    retvald = (double) (*(float*)res);
+                    T = DoubleType;
+                    break;
+                case 'D':
+                    retvald = (double) (*(long double*)res);
+                    T = DoubleType;
+                    break;
                 default: {
                     TCLObj* obj = [TCLObj obj];
                     obj.stringValue = [NSString stringWithFormat:@"Invalid return type %d", type[0]];
@@ -133,6 +180,10 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     break;
                 }
             }
+            if ( T == IntType )
+                [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromInt:retvali]];
+            else if ( T == DoubleType )
+                [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromDouble:retvald]];
             return TCL_OK;
         }
         @catch (NSException *exception) {

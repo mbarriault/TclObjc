@@ -24,7 +24,7 @@
 
 -(int) huh {
     [TCLInterp sharedInterp].objResult = [TCLObj objWithCObj:Tcl_NewStringObj("HUH?!", -1)];
-    return TCL_ERROR;
+    return TCL_OK;
 }
 
 -(int) twoargs:(NSString*)arg1 and:(NSString*)arg2 {
@@ -49,6 +49,6 @@ int Testlib_Init(Tcl_Interp* interp) {
     Foo* foo = [[Foo alloc] init];
     CFBridgingRetain(foo);
     [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
-    [[TCLInterp sharedInterp] createObject:[Foo class] name:@"Foo"];
+    [[TCLInterp sharedInterp] createObject:[Foo class] name:@"foo"];
     return TCL_OK;
 }

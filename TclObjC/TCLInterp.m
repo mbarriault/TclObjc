@@ -39,7 +39,7 @@
 
 -(void) error:(NSString *)error {
     [self resetResult];
-    [self setObjFromString:error];
+    [self setObjFromString:[@"Error: " stringByAppendingString:error]];
     _error = TCL_ERROR;
 }
 
@@ -92,7 +92,8 @@ typedef struct {
 
 typedef enum {
     IntType,
-    DoubleType
+    DoubleType,
+    NoChooseType
 } ChooseType;
 
 int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv[]) {
@@ -128,14 +129,26 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
             method_getReturnType(m, type, 256);
             int retvali;
             double retvald;
-            ChooseType T;
+            ChooseType T = NoChooseType;
             switch (type[0]) {
                 case '@': {
                     id retobj = (__bridge_transfer id) res;
                     NSArray* keys = [[TCLInterp sharedInterp].store allKeysForObject:retobj];
                     if ( keys.count > 0 ) {
+                        // Object already managed by interpreter, return it
                         [[TCLInterp sharedInterp] setObjFromString:keys[0]];
                         return TCL_OK;
+                    }
+                    else if ( [retobj isKindOfClass:[NSString class]] ) {
+                        // A string, so assume will never be managed
+                        [[TCLInterp sharedInterp] setObjFromString:(NSString *)retobj];
+                    }
+                    else {
+                        // Add code in future to add object to manage, return error for now
+                        NSMutableString* errString = [NSMutableString stringWithString:@"returned object not managed by Tcl"];
+                        if ( [retobj respondsToSelector:@selector(description)] )
+                            [errString appendFormat:@", but reports value \"%@\"", [retobj description]];
+                        [[TCLInterp sharedInterp] error:[NSString stringWithString:errString]];
                     }
                     break;
                 }

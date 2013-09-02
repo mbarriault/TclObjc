@@ -49,6 +49,15 @@
     // does nothing
 }
 
+-(NSString*) astring {
+    return @"HOHO";
+}
+
+-(NSValue*) avalue {
+    NSValue* val = [NSValue valueWithSize:NSMakeSize(1., 1.)];
+    return val;
+}
+
 @end
 
 int Testlib_Init(Tcl_Interp* interp) {

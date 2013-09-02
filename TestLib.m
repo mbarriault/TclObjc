@@ -27,6 +27,10 @@
     return TCL_OK;
 }
 
+-(int) other {
+    return 37;
+}
+
 -(int) twoargs:(NSString*)arg1 and:(NSString*)arg2 {
     NSLog(@"%@ %@", arg1, arg2);
     return TCL_OK;

@@ -39,9 +39,7 @@
 
 -(void) error:(NSString *)error {
     [self resetResult];
-    TCLObj* ret = [TCLObj obj];
-    ret.stringValue = error;
-    [self setObjResult:ret];
+    [self setObjFromString:error];
     _error = TCL_ERROR;
 }
 
@@ -71,6 +69,18 @@
 
 -(void) setObjResult:(TCLObj *)obj {
     Tcl_SetObjResult(self.interp, obj.obj);
+}
+
+-(void) setObjFromInt:(int)intValue {
+    [self setObjResult:[TCLObj objFromInt:intValue]];
+}
+
+-(void) setObjFromDouble:(double)doubleValue {
+    [self setObjResult:[TCLObj objFromDouble:doubleValue]];
+}
+
+-(void) setObjFromString:(NSString *)stringValue {
+    [self setObjResult:[TCLObj objFromString:stringValue]];
 }
 
 typedef struct {
@@ -124,7 +134,7 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     id retobj = (__bridge_transfer id) res;
                     NSArray* keys = [[TCLInterp sharedInterp].store allKeysForObject:retobj];
                     if ( keys.count > 0 ) {
-                        [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromString:keys[0]]];
+                        [[TCLInterp sharedInterp] setObjFromString:keys[0]];
                         return TCL_OK;
                     }
                     break;
@@ -174,22 +184,18 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     T = DoubleType;
                     break;
                 default: {
-                    TCLObj* obj = [TCLObj obj];
-                    obj.stringValue = [NSString stringWithFormat:@"Invalid return type %d", type[0]];
-                    [[TCLInterp sharedInterp] setObjResult:obj];
+                    [[TCLInterp sharedInterp] setObjFromString:[NSString stringWithFormat:@"Invalid return type %d", type[0]]];
                     break;
                 }
             }
             if ( T == IntType )
-                [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromInt:retvali]];
+                [[TCLInterp sharedInterp] setObjFromInt:retvali];
             else if ( T == DoubleType )
-                [[TCLInterp sharedInterp] setObjResult:[TCLObj objFromDouble:retvald]];
+                [[TCLInterp sharedInterp] setObjFromDouble:retvald];
             return TCL_OK;
         }
         @catch (NSException *exception) {
-            TCLObj* obj = [TCLObj obj];
-            obj.stringValue = [NSString stringWithFormat:@"Selector %@ raised exception %@", NSStringFromSelector(sel), exception.description];
-            [[TCLInterp sharedInterp] setObjResult:obj];
+            [[TCLInterp sharedInterp] setObjFromString:[NSString stringWithFormat:@"Selector %@ raised exception %@", NSStringFromSelector(sel), exception.description]];
             return TCL_ERROR;
         }
         @finally {
@@ -199,9 +205,7 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
         }
     }
     else {
-        TCLObj* obj = [TCLObj obj];
-        obj.stringValue = [NSString stringWithFormat:@"Object doesn't respond to selector %@", NSStringFromSelector(sel)];
-        [[TCLInterp sharedInterp] setObjResult:obj];
+        [[TCLInterp sharedInterp] setObjFromString:[NSString stringWithFormat:@"Object doesn't respond to selector %@", NSStringFromSelector(sel)]];
         return TCL_ERROR;
     }
 }

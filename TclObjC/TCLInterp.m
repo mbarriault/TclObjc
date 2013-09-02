@@ -183,6 +183,9 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     retvald = (double) (*(long double*)res);
                     T = DoubleType;
                     break;
+                case 'v':
+                    [[TCLInterp sharedInterp] resetResult];
+                    break;
                 default: {
                     [[TCLInterp sharedInterp] setObjFromString:[NSString stringWithFormat:@"Invalid return type %d", type[0]]];
                     break;

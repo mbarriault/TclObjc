@@ -45,6 +45,10 @@
     return self;
 }
 
+-(void) somefunc {
+    // does nothing
+}
+
 @end
 
 int Testlib_Init(Tcl_Interp* interp) {

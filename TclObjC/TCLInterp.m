@@ -62,7 +62,7 @@
 -(void) appendResult:(NSString *)result, ... {
     va_list args;
     va_start(args, result);
-    for ( NSString* arg = result; arg != nil; va_arg(args, NSString*) )
+    for ( NSString* arg = result; arg != nil; arg = va_arg(args, NSString*) )
         Tcl_AppendResult(self.interp, [arg cStringUsingEncoding:NSASCIIStringEncoding], NULL);
     va_end(args);
 }

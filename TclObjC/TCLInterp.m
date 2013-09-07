@@ -117,7 +117,10 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
             }
         }
 //        NSLog(@"Selector: %@ | Args %@", selString, args);
-        sel = NSSelectorFromString(selString);
+        if ( [selString isEqualToString:@""] )
+            sel = @selector(description);
+        else
+            sel = NSSelectorFromString(selString);
     }
     if ( [oobj respondsToSelector:sel] ) {
         void* res = NULL;

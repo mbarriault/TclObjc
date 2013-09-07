@@ -102,9 +102,8 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
     NSMutableArray* args;
     if ( sel != nil ) {
         args = [NSMutableArray arrayWithCapacity:objc-1];
-        for ( int i=1; i<objc; ++i ) {
-            [args addObject:[NSString stringWithCString:Tcl_GetStringFromObj(objv[i], NULL) encoding:NSASCIIStringEncoding]];
-        }
+        for ( int i=1; i<objc; ++i )
+            [args addObject:[TCLObj objWithCObj:objv[i]]];
     }
     else {
         NSMutableString* selString = [NSMutableString string];
@@ -114,19 +113,64 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
             ++i;
             if ( i != objc ) {
                 [selString appendString:@":"];
-                [args addObject:[NSString stringWithCString:Tcl_GetStringFromObj(objv[i], NULL) encoding:NSASCIIStringEncoding]];
+                [args addObject:[TCLObj objWithCObj:objv[i]]];
             }
         }
-        NSLog(@"Selector: %@ | Args %@", selString, args);
+//        NSLog(@"Selector: %@ | Args %@", selString, args);
         sel = NSSelectorFromString(selString);
     }
     if ( [oobj respondsToSelector:sel] ) {
         void* res = NULL;
         @try {
-            res = [oobj performSelector:sel withContext:args];
+            NSMutableArray* callArgs = [NSMutableArray arrayWithCapacity:args.count];
             Method m = class_getInstanceMethod([oobj class], sel);
+            char argtype[256];
             char type[256];
             method_getReturnType(m, type, 256);
+            int N = method_getNumberOfArguments(m);
+            for ( int i=0; i<N-2; ++i ) {
+                method_getArgumentType(m, i+2, argtype, 256);
+//                NSLog(@"Argument %d/%d type %s", i+1, N-2, argtype);
+                switch (argtype[0]) {
+                    case '@': {
+                        NSString* key = [args[i] stringValue];
+                        id argobj = nil;
+                        if ( (argobj = [TCLInterp sharedInterp].store[key]) != nil )
+                            [callArgs addObject:argobj];
+                        else
+                            [callArgs addObject:key];
+                        break;
+                    }
+                    case 'c':
+                    case 'C':
+                    case 's':
+                    case 'S':
+                    case 'i':
+                    case 'I':
+                    case 'q':
+                    case 'Q': {
+                        int val = [args[i] intValue];
+                        NSValue* argobj = [NSValue value:(void*)&val withObjCType:argtype];
+                        [callArgs addObject:argobj];
+                        break;
+                    }
+                    case 'f': {
+                        float val = (float)[args[i] doubleValue];
+                        NSValue* argobj = [NSValue value:&val withObjCType:argtype];
+                        [callArgs addObject:argobj];
+                        break;
+                    }
+                    case 'd': {
+                        double val = [args[i] doubleValue];
+                        NSValue* argobj = [NSValue value:&val withObjCType:argtype];
+                        [callArgs addObject:argobj];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+            res = [oobj performSelector:sel withContext:callArgs];
             int retvali;
             double retvald;
             ChooseType T = NoChooseType;
@@ -189,11 +233,7 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     T = DoubleType;
                     break;
                 case 'd':
-                    retvald = (double) (*(float*)res);
-                    T = DoubleType;
-                    break;
-                case 'D':
-                    retvald = (double) (*(long double*)res);
+                    retvald = (double) (*(double*)res);
                     T = DoubleType;
                     break;
                 case 'v':

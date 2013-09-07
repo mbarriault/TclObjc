@@ -80,4 +80,8 @@
     Tcl_SetStringObj(self.obj, stringValue.UTF8String, (int)stringValue.length);
 }
 
+-(NSString*) description {
+    return [self stringValue];
+}
+
 @end

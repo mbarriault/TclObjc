@@ -13,6 +13,10 @@
 -(int) bar:(NSString*)val;
 @end
 
+@interface Bar : NSObject
+@property (readwrite) int x;
+@end;
+
 @implementation Foo
 
 -(int) bar:(NSString*)val {
@@ -58,6 +62,28 @@
     return val;
 }
 
+-(int) up:(int)x {
+    return x+1;
+}
+
+-(float) sinf:(float)x {
+    return sinf(x);
+}
+
+-(double) sin:(double)x {
+    return sin(x);
+}
+
+-(NSString*) dobar:(Bar*)bar {
+    return [NSString stringWithFormat:@"String with %d", bar.x];
+}
+
+@end
+
+@implementation Bar
+-(NSString*) description {
+    return [@(self.x) description];
+}
 @end
 
 int Testlib_Init(Tcl_Interp* interp) {
@@ -67,5 +93,6 @@ int Testlib_Init(Tcl_Interp* interp) {
     CFBridgingRetain(foo);
     [[TCLInterp sharedInterp] createCommand:@"foobar" selector:@selector(bar:) withObject:foo];
     [[TCLInterp sharedInterp] createObject:[Foo class] name:@"foo"];
+    [[TCLInterp sharedInterp] createObject:[Bar class] name:@"bar"];
     return TCL_OK;
 }

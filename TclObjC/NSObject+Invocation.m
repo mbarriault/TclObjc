@@ -27,8 +27,10 @@
             for ( NSUInteger i=0; i<parameterCount; ++i ) {
                 id currentValue = [parameterValues objectAtIndex:i];
                 if ( [currentValue isKindOfClass:[NSValue class]] ) {
-                    void* bufferForValue;
-                    [currentValue getValue:&bufferForValue];
+                    NSUInteger length;
+                    NSGetSizeAndAlignment([currentValue objCType], &length, nil);
+                    void* bufferForValue = (void*)malloc(length);
+                    [currentValue getValue:bufferForValue];
                     [invocation setArgument:bufferForValue atIndex:(i+2)];
                 }
                 else {

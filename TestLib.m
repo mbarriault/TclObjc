@@ -78,6 +78,10 @@
     return [NSString stringWithFormat:@"String with %d", bar.x];
 }
 
+-(Bar*) newbar {
+    return [[Bar alloc] init];
+}
+
 @end
 
 @implementation Bar

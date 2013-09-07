@@ -34,4 +34,5 @@
 @property (readwrite) int error;
 @property (readonly) Tcl_Interp* interp;
 @property (strong) NSMutableDictionary* store;
+@property (readwrite) NSUInteger unmanagedCount;
 @end

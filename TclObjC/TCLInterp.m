@@ -33,6 +33,7 @@
     if ( (self = [super init]) ) {
         _interp = nil;
         _store = [NSMutableDictionary dictionary];
+        _unmanagedCount = 0;
     }
     return self;
 }
@@ -188,14 +189,20 @@ int RunObjCmd(ClientData data, Tcl_Interp* interp, int objc, Tcl_Obj* const objv
                     }
                     else if ( [retobj isKindOfClass:[NSString class]] ) {
                         // A string, so assume will never be managed
-                        [[TCLInterp sharedInterp] setObjFromString:(NSString *)retobj];
+                        [[TCLInterp sharedInterp] setObjFromString:(NSString*)retobj];
+                        return TCL_OK;
                     }
                     else {
-                        // Add code in future to add object to manage, return error for now
-                        NSMutableString* errString = [NSMutableString stringWithString:@"returned object not managed by Tcl"];
-                        if ( [retobj respondsToSelector:@selector(description)] )
-                            [errString appendFormat:@", but reports value \"%@\"", [retobj description]];
-                        [[TCLInterp sharedInterp] error:[NSString stringWithString:errString]];
+                        // Returned object isn't already registered, generate a unique name
+                        NSString* key = nil;
+                        do {
+                            key = [NSString stringWithFormat:@"objc#%04lu", (unsigned long)[TCLInterp sharedInterp].unmanagedCount];
+                            ++[TCLInterp sharedInterp].unmanagedCount;
+                        } while ([TCLInterp sharedInterp].store[key] != nil);
+                        [[TCLInterp sharedInterp] createCommand:key withObject:retobj];
+                        [TCLInterp sharedInterp].store[key] = retobj;
+                        [[TCLInterp sharedInterp] setObjFromString:key];
+                        return TCL_OK;
                     }
                     break;
                 }
